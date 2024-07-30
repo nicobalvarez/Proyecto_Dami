@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leer PDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="file"] {
+            display: none; /* Ocultar el botón de entrada de archivo */
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 8px 15px; /* Ajustar el tamaño del botón */
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            width: auto; /* Ajustar el ancho */
+            margin: 10px 0;
+            font-size: 14px; /* Tamaño de fuente más pequeño */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        .custom-file-upload:hover {
+            background-color: #218838;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px; /* Tamaño de fuente del botón de subir */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            border: 1px solid #ddd; /* Añadir borde */
+        }
+        a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cargar PDF</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label class="custom-file-upload">
+                <input type="file" name="file" accept=".pdf" required>
+                <i class="fas fa-upload"></i> Seleccionar PDF
+            </label>
+            <button type="submit"><i class="fas fa-upload"></i> Subir PDF</button>
+        </form>
+
+        {% if content %}
+            <h2>Contenido del PDF:</h2>
+            <pre>{{ content }}</pre>
+            <a href="/download/{{ filename }}/json">Descargar como JSON</a><br>
+            <a href="/download/{{ filename }}/txt">Descargar como TXT</a>
+        {% endif %}
+    </div>
+</body>
+</html>
